@@ -1,5 +1,6 @@
-flask
+Flask
 gunicorn
+transformers
+torch
 PyPDF2
 python-docx
-reportlab

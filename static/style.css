@@ -36,6 +36,8 @@ body{
     border:1px solid rgba(255,255,255,0.15);
 
     text-align:center;
+
+    animation:fadeIn 1s ease;
 }
 
 /* TITLE */
@@ -314,5 +316,65 @@ button:hover{
     .file-box{
 
         flex-direction:column;
+    }
+}
+.logo{
+
+    width:120px;
+
+    margin-bottom:20px;
+}
+.loader-container{
+
+    display:none;
+
+    margin-top:20px;
+
+    color:white;
+}
+
+.loader{
+
+    width:45px;
+
+    height:45px;
+
+    border:5px solid rgba(255,255,255,0.3);
+
+    border-top:5px solid #00c6ff;
+
+    border-radius:50%;
+
+    animation:spin 1s linear infinite;
+
+    margin:auto;
+}
+
+@keyframes spin{
+
+    100%{
+        transform:rotate(360deg);
+    }
+}
+footer{
+
+    margin-top:30px;
+
+    color:white;
+
+    text-align:center;
+
+    font-size:16px;
+}
+@keyframes fadeIn{
+
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
     }
 }
