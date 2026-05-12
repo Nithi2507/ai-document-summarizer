@@ -70,3 +70,10 @@ button:hover{
 .summary-box h2{
     margin-top:0;
 }
+.summary-box button {
+
+    margin-right: 15px;
+
+    margin-top: 15px;
+
+}

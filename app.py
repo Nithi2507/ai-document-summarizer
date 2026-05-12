@@ -1,64 +1,90 @@
-import os
-os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "1"
-
+from flask import send_file
 from flask import Flask, render_template, request
 from summarizer import summarize_text
-from PyPDF2 import PdfReader
-from docx import Document
+
+from reportlab.platypus import SimpleDocTemplate, Paragraph
+from reportlab.lib.styles import getSampleStyleSheet
+
+import PyPDF2
+import docx
 
 app = Flask(__name__)
 
-@app.route("/", methods=["GET", "POST"])
+def extract_pdf_text(pdf_file):
+
+    text = ""
+
+    reader = PyPDF2.PdfReader(pdf_file)
+
+    for page in reader.pages:
+        text += page.extract_text()
+
+    return text
+
+def extract_docx_text(docx_file):
+
+    doc = docx.Document(docx_file)
+
+    text = ""
+
+    for para in doc.paragraphs:
+        text += para.text
+
+    return text
+
+@app.route('/', methods=['GET', 'POST'])
 def home():
 
     summary = ""
 
-    text = ""
+    if request.method == 'POST':
 
-    if request.method == "POST":
+        text = request.form.get('text')
 
-        text = request.form.get("text")
+        pdf = request.files.get('pdf')
 
-        pdf = request.files.get("pdf")
+        docx_file = request.files.get('docx')
 
-        docx_file = request.files.get("docx")
-
-        max_length = int(request.form.get("length"))
-
-
-        # PDF upload
         if pdf and pdf.filename != "":
 
-            reader = PdfReader(pdf)
+            text = extract_pdf_text(pdf)
 
-            pdf_text = ""
-
-            for page in reader.pages:
-                pdf_text += page.extract_text()
-
-            text = pdf_text
-
-        # DOCX upload
         elif docx_file and docx_file.filename != "":
 
-            doc = Document(docx_file)
+            text = extract_docx_text(docx_file)
 
-            docx_text = ""
+        if text and text.strip() != "":
 
-            for para in doc.paragraphs:
-                docx_text += para.text + "\n"
+            summary = summarize_text(text)
 
-            text = docx_text
+    return render_template(
+        'index.html',
+        summary=summary
+    )
 
-        if text:
+@app.route('/download')
 
-            try:
-                summary = summarize_text(text, max_length)
+def download_pdf():
 
-            except Exception as e:
-                summary = f"Error: {str(e)}"
+    summary = request.args.get('summary')
 
-    return render_template("index.html", summary=summary)
+    pdf_path = "summary.pdf"
 
-if __name__ == "__main__":
+    doc = SimpleDocTemplate(pdf_path)
+
+    styles = getSampleStyleSheet()
+
+    content = []
+
+    content.append(
+        Paragraph(summary, styles['BodyText'])
+    )
+
+    doc.build(content)
+
+    return send_file(
+        pdf_path,
+        as_attachment=True
+    )
+if __name__ == '__main__':
     app.run(debug=True)

@@ -1,17 +1,17 @@
 from transformers import pipeline
 
-# Load summarization model
 summarizer = pipeline(
     "summarization",
-    model="facebook/bart-large-cnn"
+    model="sshleifer/distilbart-cnn-12-6"
 )
 
-def summarize_text(text, max_length):
-    summary = summarizer(
+def summarize_text(text):
+
+    result = summarizer(
         text,
-        max_length=max_length,
-        min_length=30,
+        max_length=60,
+        min_length=20,
         do_sample=False
     )
 
-    return summary[0]['summary_text']
+    return result[0]['summary_text']

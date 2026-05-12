@@ -31,29 +31,34 @@
             <input type="file" name="docx">
 
         </div>
+
         <label>Select Summary Length</label>
 
-<select name="length">
+        <select name="length">
 
-    <option value="50">
-        Short
-    </option>
+            <option value="50">
+                Short
+            </option>
 
-    <option value="100">
-        Medium
-    </option>
+            <option value="100">
+                Medium
+            </option>
 
-    <option value="150">
-        Long
-    </option>
+            <option value="150">
+                Long
+            </option>
 
-</select>
+        </select>
 
-<br><br>
+        <br><br>
 
-        <button type="submit">
+        <button type="submit" onclick="showLoading()">
             Summarize
         </button>
+
+        <p id="loading" style="display:none;">
+            Generating summary...
+        </p>
 
     </form>
 
@@ -64,6 +69,16 @@
         <h2>Summary</h2>
 
         <p id="summary-text">{{ summary }}</p>
+
+        <br>
+
+        <a href="/download?summary={{ summary }}">
+
+            <button>
+                Download PDF
+            </button>
+
+        </a>
 
         <button onclick="copySummary()">
             Copy Summary
@@ -85,6 +100,12 @@ function copySummary() {
     navigator.clipboard.writeText(text);
 
     alert("Summary copied!");
+
+}
+
+function showLoading() {
+
+    document.getElementById("loading").style.display = "block";
 
 }
 
