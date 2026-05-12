@@ -1,17 +1,7 @@
-from transformers import pipeline
-
-summarizer = pipeline(
-    "summarization",
-    model="sshleifer/distilbart-cnn-12-6"
-)
-
 def summarize_text(text):
 
-    result = summarizer(
-        text,
-        max_length=60,
-        min_length=20,
-        do_sample=False
-    )
+    sentences = text.split('.')
 
-    return result[0]['summary_text']
+    summary = '. '.join(sentences[:3])
+
+    return summary
