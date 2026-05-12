@@ -1,4 +1,5 @@
 body{
+
     margin:0;
     padding:0;
 
@@ -16,7 +17,7 @@ body{
     min-height:100vh;
 }
 
-/* MAIN CONTAINER */
+/* CONTAINER */
 
 .container{
 
@@ -40,8 +41,6 @@ body{
 /* TITLE */
 
 h1{
-
-    text-align:center;
 
     font-size:72px;
 
@@ -68,7 +67,7 @@ textarea{
 
     font-size:20px;
 
-    background: rgba(255,255,255,0.08);
+    background:rgba(255,255,255,0.08);
 
     color:white;
 
@@ -80,19 +79,14 @@ textarea{
 
     outline:none;
 
-    backdrop-filter: blur(5px);
-
     box-sizing:border-box;
+
+    backdrop-filter: blur(5px);
 }
 
 textarea::placeholder{
-    color:#f1f1f1;
-}
 
-/* UPLOAD SECTION */
-
-.upload-section{
-    margin-top:25px;
+    color:#eeeeee;
 }
 
 /* LABELS */
@@ -101,37 +95,87 @@ label{
 
     display:block;
 
-    margin-top:25px;
+    margin-top:30px;
 
-    margin-bottom:10px;
+    margin-bottom:12px;
 
     font-size:22px;
 
-    font-weight:600;
+    font-weight:700;
 
-    color:#ffffff;
-
-    letter-spacing:0.5px;
+    color:white;
 
     text-shadow:
         2px 2px 8px rgba(0,0,0,0.8);
 }
 
-/* HIDE DEFAULT FILE INPUT */
+/* FILE BOX */
 
-input[type="file"]{
-    display:none;
+.file-box{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:18px;
+
+    margin-bottom:20px;
+
+    flex-wrap:wrap;
 }
 
-/* SAME STYLE FOR ALL CONTROLS */
+/* CUSTOM FILE BUTTON */
 
-.custom-file-upload,
-select,
-button{
+.custom-file-upload{
 
-    width:320px;
+    display:inline-block;
 
-    height:55px;
+    padding:14px 28px;
+
+    border-radius:14px;
+
+    background:linear-gradient(135deg,#00c6ff,#0072ff);
+
+    color:white;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+    box-shadow:0 5px 15px rgba(0,114,255,0.4);
+}
+
+.custom-file-upload:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 8px 20px rgba(0,114,255,0.7);
+}
+
+/* FILE NAME */
+
+.file-box span{
+
+    color:white;
+
+    font-size:17px;
+
+    font-weight:500;
+}
+
+/* SELECT BOX */
+
+select{
+
+    width:300px;
+
+    padding:14px;
 
     border:none;
 
@@ -139,103 +183,56 @@ button{
 
     font-size:18px;
 
-    font-weight:600;
-
-    font-family:'Segoe UI', sans-serif;
-
-    text-align:center;
-
-    cursor:pointer;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    margin:auto;
-}
-
-/* CUSTOM FILE BUTTON */
-
-.custom-file-upload{
-
-    background:rgba(255,255,255,0.12);
+    background:rgba(255,255,255,0.15);
 
     color:white;
-
-    border:1px solid rgba(255,255,255,0.3);
-
-    backdrop-filter:blur(5px);
-
-    transition:0.3s;
-
-    margin-bottom:25px;
-}
-
-/* SELECT BOX */
-
-select{
-
-    background:rgba(255,255,255,0.12);
-
-    color:white;
-
-    border:1px solid rgba(255,255,255,0.3);
-
-    backdrop-filter:blur(5px);
 
     outline:none;
 
-    appearance:none;
+    backdrop-filter: blur(5px);
 
-    margin-bottom:30px;
+    text-align:center;
+
+    margin-top:10px;
+}
+
+select option{
+
+    color:black;
 }
 
 /* BUTTON */
 
 button{
 
+    margin-top:35px;
+
+    padding:16px 45px;
+
+    border:none;
+
+    border-radius:14px;
+
     background:linear-gradient(135deg,#00c6ff,#0072ff);
 
     color:white;
 
+    font-size:22px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
     transition:0.3s;
 
     box-shadow:0 6px 20px rgba(0,114,255,0.4);
-
-    margin:auto;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
 }
 
-/* HOVER EFFECT */
-
-.custom-file-upload:hover,
 button:hover{
 
-    transform:translateY(-4px);
+    transform:translateY(-4px) scale(1.04);
 
     box-shadow:0 10px 30px rgba(0,114,255,0.7);
-
-    background:linear-gradient(135deg,#00c6ff,#0072ff);
-}
-
-/* FILE NAME */
-
-.file-name{
-
-    display:block;
-
-    margin-top:8px;
-
-    color:#f1f1f1;
-
-    font-size:16px;
 }
 
 /* SUMMARY BOX */
@@ -252,16 +249,16 @@ button:hover{
 
     color:white;
 
-    backdrop-filter: blur(8px);
-
     text-align:left;
+
+    backdrop-filter: blur(8px);
 }
 
 .summary-box h2{
 
-    margin-top:0;
-
     font-size:36px;
+
+    margin-top:0;
 }
 
 .summary-box p{
@@ -276,31 +273,46 @@ button:hover{
     margin-right:15px;
 }
 
-/* MOBILE RESPONSIVE */
+/* MOBILE */
 
 @media(max-width:768px){
 
     .container{
+
         width:90%;
+
         padding:25px;
     }
 
     h1{
+
         font-size:42px;
     }
 
     textarea{
+
         height:220px;
+
         font-size:16px;
     }
 
     label{
-        font-size:20px;
+
+        font-size:18px;
     }
 
-    .custom-file-upload,
-    select,
-    button{
+    select{
+
         width:100%;
+    }
+
+    button{
+
+        width:100%;
+    }
+
+    .file-box{
+
+        flex-direction:column;
     }
 }

@@ -5,7 +5,8 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>AI Document Summarizer</title>
 
@@ -37,43 +38,85 @@
 
             <label>Upload PDF File</label>
 
-            <label for="pdf-upload" class="custom-file-upload">
-                Choose PDF File
-            </label>
+            <div class="file-box">
+
+                <label for="pdf-upload"
+                       class="custom-file-upload">
+
+                    Choose PDF File
+
+                </label>
+
+                <span id="pdf-name">
+
+                    No file chosen
+
+                </span>
+
+            </div>
 
             <input
                 type="file"
                 id="pdf-upload"
                 name="pdf_file"
                 accept=".pdf"
+                hidden
+                onchange="showPDFName(this)"
             >
 
             <!-- DOCX -->
 
             <label>Upload DOCX File</label>
 
-            <label for="docx-upload" class="custom-file-upload">
-                Choose DOCX File
-            </label>
+            <div class="file-box">
+
+                <label for="docx-upload"
+                       class="custom-file-upload">
+
+                    Choose DOCX File
+
+                </label>
+
+                <span id="docx-name">
+
+                    No file chosen
+
+                </span>
+
+            </div>
 
             <input
                 type="file"
                 id="docx-upload"
                 name="docx_file"
                 accept=".docx"
+                hidden
+                onchange="showDOCXName(this)"
             >
 
-            <!-- SUMMARY LENGTH -->
+            <!-- SUMMARY -->
 
             <label>Select Summary Length</label>
 
             <select name="summary_length">
 
-                <option value="short">Short</option>
+                <option value="short">
 
-                <option value="medium">Medium</option>
+                    Short
 
-                <option value="long">Long</option>
+                </option>
+
+                <option value="medium">
+
+                    Medium
+
+                </option>
+
+                <option value="long">
+
+                    Long
+
+                </option>
 
             </select>
 
@@ -81,13 +124,19 @@
 
         <!-- BUTTON -->
 
-        <button type="submit" onclick="showLoading()">
+        <button type="submit"
+                onclick="showLoading()">
+
             Summarize
+
         </button>
 
         <!-- LOADING -->
 
-        <p id="loading" style="display:none; color:white; margin-top:20px;">
+        <p id="loading"
+           style="display:none;
+                  color:white;
+                  margin-top:20px;">
 
             Generating summary...
 
@@ -123,8 +172,7 @@
 
         <button
             type="button"
-            onclick="copySummary()"
-        >
+            onclick="copySummary()">
 
             Copy Summary
 
@@ -153,7 +201,34 @@ function copySummary() {
 
 function showLoading() {
 
-    document.getElementById("loading").style.display = "block";
+    document.getElementById("loading").style.display =
+        "block";
+
+}
+
+/* PDF NAME */
+
+function showPDFName(input){
+
+    if(input.files.length > 0){
+
+        document.getElementById("pdf-name").innerText =
+            input.files[0].name;
+
+    }
+
+}
+
+/* DOCX NAME */
+
+function showDOCXName(input){
+
+    if(input.files.length > 0){
+
+        document.getElementById("docx-name").innerText =
+            input.files[0].name;
+
+    }
 
 }
 
