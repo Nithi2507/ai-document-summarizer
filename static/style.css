@@ -16,18 +16,19 @@ body{
 }
 
 .container{
-    width:70%;
+    width:75%;
+
     margin:40px auto;
 
-    background: rgba(0,0,0,0.45);
+    background: rgba(0,0,0,0.55);
 
-    padding:30px;
+    padding:40px;
 
-    border-radius:15px;
+    border-radius:25px;
 
-    box-shadow:0 0 20px rgba(0,0,0,0.3);
+    box-shadow:0 0 30px rgba(0,0,0,0.5);
 
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px);
 
     animation: fadeIn 1s ease;
 }
@@ -35,49 +36,63 @@ body{
 h1{
     text-align:center;
 
-    font-size:60px;
+    font-size:70px;
 
-    margin-bottom:35px;
+    margin-bottom:40px;
 
     color:#ffffff;
 
-    font-weight:bold;
-
-    text-shadow:
-        3px 3px 12px rgba(0,0,0,0.8);
+    font-weight:800;
 
     letter-spacing:2px;
+
+    text-shadow:
+        0 0 10px rgba(255,255,255,0.3),
+        0 0 20px rgba(0,0,0,0.7);
 }
 
 textarea{
     width:100%;
+
     height:250px;
 
-    padding:15px;
+    padding:20px;
 
-    font-size:18px;
+    font-size:20px;
 
-    background: rgba(255,255,255,0.15);
+    background: rgba(0,0,0,0.35);
 
     color:white;
 
-    border:1px solid rgba(255,255,255,0.3);
+    border:1px solid rgba(255,255,255,0.2);
 
-    border-radius:10px;
+    border-radius:15px;
 
     resize:none;
 
     box-sizing:border-box;
+
+    outline:none;
+
+    transition:0.3s;
+}
+
+textarea:focus{
+
+    border:1px solid #00b4ff;
+
+    box-shadow:0 0 15px rgba(0,180,255,0.5);
 }
 
 textarea::placeholder{
-    color:#f1f1f1;
+    color:#dddddd;
 }
 
 label{
     display:block;
 
     margin-top:25px;
+
     margin-bottom:10px;
 
     font-size:24px;
@@ -89,8 +104,13 @@ label{
     text-shadow:1px 1px 5px rgba(0,0,0,0.7);
 }
 
+.upload-section{
+    margin-top:30px;
+}
+
 input[type="file"]{
     margin-bottom:20px;
+
     color:white;
 }
 
@@ -114,6 +134,7 @@ input[type="file"]::file-selector-button{
 }
 
 select{
+
     padding:10px 15px;
 
     border-radius:8px;
@@ -133,13 +154,13 @@ button{
 
     margin-top:30px;
 
-    padding:14px 35px;
+    padding:15px 40px;
 
     border:none;
 
-    border-radius:12px;
+    border-radius:14px;
 
-    background:linear-gradient(135deg,#ff6a00,#ee0979);
+    background:linear-gradient(135deg,#00b4ff,#0066ff);
 
     color:white;
 
@@ -154,9 +175,9 @@ button{
 
 button:hover{
 
-    transform:translateY(-3px) scale(1.03);
+    transform:translateY(-4px);
 
-    box-shadow:0 8px 20px rgba(0,0,0,0.3);
+    box-shadow:0 10px 25px rgba(0,0,0,0.4);
 }
 
 .summary-box{
@@ -167,13 +188,17 @@ button:hover{
 
     border-radius:15px;
 
-    background:rgba(255,255,255,0.15);
+    background:rgba(255,255,255,0.12);
 
     color:white;
+
+    backdrop-filter: blur(8px);
 }
 
 .summary-box h2{
     margin-top:0;
+
+    font-size:32px;
 }
 
 .summary-box button{
