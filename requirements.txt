@@ -4,4 +4,5 @@ torch
 sentencepiece
 PyPDF2
 python-docx
-reportlab  
+reportlab
+gunicorn
