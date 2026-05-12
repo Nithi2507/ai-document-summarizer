@@ -1,7 +1,8 @@
 body{
     margin:0;
-    padding:0;
-    font-family: 'Segoe UI', sans-serif;
+    padding:30px;
+
+    font-family:'Segoe UI', sans-serif;
 
     background:url("https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1600&auto=format&fit=crop") no-repeat center center fixed;
 
@@ -15,22 +16,20 @@ body{
 }
 
 .container{
+    width:70%;
+    margin:40px auto;
 
-    width:75%;
+    background: rgba(0,0,0,0.45);
 
-    max-width:1000px;
+    padding:30px;
 
-    background:rgba(20,20,20,0.75);
+    border-radius:15px;
 
-    backdrop-filter:blur(10px);
+    box-shadow:0 0 20px rgba(0,0,0,0.3);
 
-    padding:40px;
+    backdrop-filter: blur(10px);
 
-    border-radius:20px;
-
-    box-shadow:0 8px 32px rgba(0,0,0,0.5);
-
-    color:white;
+    animation: fadeIn 1s ease;
 }
 
 h1{
@@ -51,26 +50,24 @@ h1{
 }
 
 textarea{
-
     width:100%;
-
     height:250px;
 
-    padding:20px;
-
-    border:none;
-
-    border-radius:15px;
+    padding:15px;
 
     font-size:18px;
 
-    background:rgba(255,255,255,0.9);
+    background: rgba(255,255,255,0.15);
 
-    color:#222;
+    color:white;
 
-    outline:none;
+    border:1px solid rgba(255,255,255,0.3);
+
+    border-radius:10px;
 
     resize:none;
+
+    box-sizing:border-box;
 }
 
 textarea::placeholder{
@@ -78,11 +75,9 @@ textarea::placeholder{
 }
 
 label{
-
     display:block;
 
     margin-top:25px;
-
     margin-bottom:10px;
 
     font-size:24px;
@@ -99,11 +94,39 @@ input[type="file"]{
     color:white;
 }
 
-select{
-    padding:10px;
-    border-radius:8px;
+input[type="file"]::file-selector-button{
+
+    padding:10px 15px;
+
     border:none;
+
+    border-radius:8px;
+
+    background:#00b4ff;
+
+    color:white;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+    margin-right:10px;
+}
+
+select{
+    padding:10px 15px;
+
+    border-radius:8px;
+
+    border:none;
+
     font-size:16px;
+
+    background:rgba(255,255,255,0.2);
+
+    color:white;
+
+    font-weight:bold;
 }
 
 button{
@@ -128,13 +151,16 @@ button{
 
     transition:0.3s;
 }
+
 button:hover{
+
     transform:translateY(-3px) scale(1.03);
 
     box-shadow:0 8px 20px rgba(0,0,0,0.3);
 }
 
 .summary-box{
+
     margin-top:35px;
 
     padding:25px;
@@ -152,4 +178,17 @@ button:hover{
 
 .summary-box button{
     margin-right:15px;
+}
+
+@keyframes fadeIn{
+
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
