@@ -1,4 +1,8 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, send_file
+import PyPDF2
+import docx
+from reportlab.pdfgen import canvas
+import io
 import PyPDF2
 import docx
 
@@ -66,5 +70,36 @@ def home():
 
     return render_template("index.html")
 
+@app.route("/download")
+def download_pdf():
+
+    summary = request.args.get("summary")
+
+    buffer = io.BytesIO()
+
+    pdf = canvas.Canvas(buffer)
+
+    pdf.setFont("Helvetica", 12)
+
+    y = 800
+
+    lines = summary.split('.')
+
+    for line in lines:
+
+        pdf.drawString(40, y, line.strip())
+
+        y -= 20
+
+    pdf.save()
+
+    buffer.seek(0)
+
+    return send_file(
+        buffer,
+        as_attachment=True,
+        download_name="summary.pdf",
+        mimetype="application/pdf"
+    )
 if __name__ == "__main__":
     app.run(debug=True)
