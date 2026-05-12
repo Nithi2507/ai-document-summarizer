@@ -2,11 +2,16 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>AI Document Summarizer</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
 </head>
 
 <body>
@@ -17,61 +22,80 @@
 
     <form method="POST" enctype="multipart/form-data">
 
+        <!-- TEXTAREA -->
+
         <textarea
-            name="text"
+            name="input_text"
             placeholder="Paste your document here..."
         ></textarea>
 
+        <!-- UPLOAD SECTION -->
+
         <div class="upload-section">
 
-    <!-- PDF -->
+            <!-- PDF -->
 
-    <label>Upload PDF File</label>
+            <label>Upload PDF File</label>
 
-    <label for="pdf-upload" class="custom-file-upload">
-        Choose PDF File
-    </label>
+            <label for="pdf-upload" class="custom-file-upload">
+                Choose PDF File
+            </label>
 
-    <input type="file" id="pdf-upload" name="pdf_file">
+            <input
+                type="file"
+                id="pdf-upload"
+                name="pdf_file"
+                accept=".pdf"
+            >
 
+            <!-- DOCX -->
 
-    <!-- DOCX -->
+            <label>Upload DOCX File</label>
 
-    <label>Upload DOCX File</label>
+            <label for="docx-upload" class="custom-file-upload">
+                Choose DOCX File
+            </label>
 
-    <label for="docx-upload" class="custom-file-upload">
-        Choose DOCX File
-    </label>
+            <input
+                type="file"
+                id="docx-upload"
+                name="docx_file"
+                accept=".docx"
+            >
 
-    <input type="file" id="docx-upload" name="docx_file">
+            <!-- SUMMARY LENGTH -->
 
+            <label>Select Summary Length</label>
 
-    <!-- SUMMARY LENGTH -->
+            <select name="summary_length">
 
-    <label>Select Summary Length</label>
+                <option value="short">Short</option>
 
-    <select name="summary_length">
+                <option value="medium">Medium</option>
 
-        <option value="short">Short</option>
+                <option value="long">Long</option>
 
-        <option value="medium">Medium</option>
+            </select>
 
-        <option value="long">Long</option>
+        </div>
 
-    </select>
-
-</div>
-        <br><br>
+        <!-- BUTTON -->
 
         <button type="submit" onclick="showLoading()">
             Summarize
         </button>
 
-        <p id="loading" style="display:none;">
+        <!-- LOADING -->
+
+        <p id="loading" style="display:none; color:white; margin-top:20px;">
+
             Generating summary...
+
         </p>
 
     </form>
+
+    <!-- SUMMARY -->
 
     {% if summary %}
 
@@ -79,20 +103,31 @@
 
         <h2>Summary</h2>
 
-        <p id="summary-text">{{ summary }}</p>
+        <p id="summary-text">
+
+            {{ summary }}
+
+        </p>
 
         <br>
 
         <a href="/download?summary={{ summary }}">
 
-            <button>
+            <button type="button">
+
                 Download PDF
+
             </button>
 
         </a>
 
-        <button onclick="copySummary()">
+        <button
+            type="button"
+            onclick="copySummary()"
+        >
+
             Copy Summary
+
         </button>
 
     </div>
@@ -100,6 +135,8 @@
     {% endif %}
 
 </div>
+
+<!-- JAVASCRIPT -->
 
 <script>
 
@@ -123,4 +160,5 @@ function showLoading() {
 </script>
 
 </body>
+
 </html>
