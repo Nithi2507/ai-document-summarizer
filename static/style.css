@@ -117,13 +117,55 @@ label{
         2px 2px 8px rgba(0,0,0,0.8);
 }
 
-/* FILE INPUT */
+/* CUSTOM FILE UPLOAD */
 
 input[type="file"]{
+    display:none;
+}
+
+.custom-file-upload{
+
+    display:inline-block;
+
+    padding:14px 28px;
+
+    border-radius:12px;
+
+    background:rgba(255,255,255,0.12);
 
     color:white;
 
-    margin-bottom:20px;
+    font-size:18px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    border:1px solid rgba(255,255,255,0.3);
+
+    backdrop-filter:blur(5px);
+
+    transition:0.3s;
+
+    margin-bottom:10px;
+}
+
+.custom-file-upload:hover{
+
+    background:linear-gradient(135deg,#00c6ff,#0072ff);
+
+    transform:translateY(-2px);
+
+    box-shadow:0 6px 20px rgba(0,114,255,0.4);
+}
+
+.file-name{
+
+    display:block;
+
+    margin-top:8px;
+
+    color:#f1f1f1;
 
     font-size:16px;
 }
@@ -241,5 +283,9 @@ button:hover{
 
     button{
         width:100%;
+    }
+
+    .custom-file-upload{
+        width:80%;
     }
 }
