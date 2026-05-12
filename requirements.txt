@@ -1,0 +1,7 @@
+flask
+transformers
+torch
+sentencepiece
+PyPDF2
+python-docx
+reportlab  
