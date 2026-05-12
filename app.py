@@ -1,90 +1,70 @@
-from flask import send_file
-from flask import Flask, render_template, request
-from summarizer import summarize_text
-
-from reportlab.platypus import SimpleDocTemplate, Paragraph
-from reportlab.lib.styles import getSampleStyleSheet
-
+from flask import Flask, render_template, request, redirect, url_for
 import PyPDF2
 import docx
 
 app = Flask(__name__)
 
-def extract_pdf_text(pdf_file):
-
-    text = ""
-
-    reader = PyPDF2.PdfReader(pdf_file)
-
-    for page in reader.pages:
-        text += page.extract_text()
-
-    return text
-
-def extract_docx_text(docx_file):
-
-    doc = docx.Document(docx_file)
-
-    text = ""
-
-    for para in doc.paragraphs:
-        text += para.text
-
-    return text
-
-@app.route('/', methods=['GET', 'POST'])
+@app.route("/", methods=["GET", "POST"])
 def home():
 
     summary = ""
 
-    if request.method == 'POST':
+    if request.method == "POST":
 
-        text = request.form.get('text')
+        text = request.form.get("input_text")
 
-        pdf = request.files.get('pdf')
+        summary_length = request.form.get("summary_length")
 
-        docx_file = request.files.get('docx')
+        pdf_file = request.files.get("pdf_file")
 
-        if pdf and pdf.filename != "":
+        docx_file = request.files.get("docx_file")
 
-            text = extract_pdf_text(pdf)
+        # PDF TEXT
+
+        if pdf_file and pdf_file.filename != "":
+
+            pdf_reader = PyPDF2.PdfReader(pdf_file)
+
+            text = ""
+
+            for page in pdf_reader.pages:
+
+                text += page.extract_text()
+
+        # DOCX TEXT
 
         elif docx_file and docx_file.filename != "":
 
-            text = extract_docx_text(docx_file)
+            doc = docx.Document(docx_file)
 
-        if text and text.strip() != "":
+            text = ""
 
-            summary = summarize_text(text)
+            for para in doc.paragraphs:
 
-    return render_template(
-        'index.html',
-        summary=summary
-    )
+                text += para.text
 
-@app.route('/download')
+        # SUMMARY
 
-def download_pdf():
+        words = text.split()
 
-    summary = request.args.get('summary')
+        if summary_length == "short":
 
-    pdf_path = "summary.pdf"
+            summary = " ".join(words[:50])
 
-    doc = SimpleDocTemplate(pdf_path)
+        elif summary_length == "medium":
 
-    styles = getSampleStyleSheet()
+            summary = " ".join(words[:100])
 
-    content = []
+        else:
 
-    content.append(
-        Paragraph(summary, styles['BodyText'])
-    )
+            summary = " ".join(words[:150])
 
-    doc.build(content)
+        return render_template(
+            "index.html",
+            summary=summary
+        )
 
-    return send_file(
-        pdf_path,
-        as_attachment=True
-    )
+    return render_template("index.html")
+
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(debug=True)
