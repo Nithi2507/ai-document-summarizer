@@ -1,8 +1,8 @@
 flask
-transformers
+gunicorn
+transformers==4.41.2
 torch
-sentencepiece
 PyPDF2
 python-docx
 reportlab
-gunicorn
+sentencepiece
